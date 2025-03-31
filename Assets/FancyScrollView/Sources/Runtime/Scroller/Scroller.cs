@@ -597,6 +597,24 @@ namespace FancyScrollView
             return amount;
         }
 
-        float CircularPosition(float p, int size) => size < 1 ? 0 : p < 0 ? size - 1 + (p + 1) % size : p % size;
+        float CircularPosition(float p, int size)
+        {
+            if (size < 1)
+            {
+                return 0f;
+            }
+
+            if (p >= 0)
+            {
+                return p % size;
+            }
+
+            if (movementType == MovementType.Unrestricted)
+            {
+                return size - 1 + (p + 1) % size;
+            }
+
+            return 0f;
+        }
     }
 }
